@@ -1,6 +1,6 @@
 # Files and mysql databases backup utility
 
-Reuires PHP version >= 8.0.
+Requires PHP version >= 8.0.
 For files backup you need `rsync` and `ssh` with added ssh key. For mysql - `mysqldump` and `zip` utilites.
 You may execute this script every day by cron.
 
