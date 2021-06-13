@@ -19,8 +19,10 @@ $fileBackupData = new FileBackupData(
     excludePaths: ['/dev', '/proc', '/sys', '/tmp', '/run'],
 );
 
-
 $fileBackupProcess = new FileBackupProcess($fileBackupData);
+
+//you may start a simple backup process just now
+$fileBackupProcess->execute("/backup-path/last");
 
 $fileBackupCopiesData = new BackupCopiesData(
     backupProcess: $fileBackupProcess,
@@ -55,8 +57,4 @@ $mysqlBackupCopiesData = new BackupCopiesData(
 
 $backupCopiesProcess = new BackupCopiesProcess([$fileBackupCopiesData, $mysqlBackupCopiesData]);
 $backupCopiesProcess->execute();
-
-//start a simple backup process
-
-$fileBackupProcess->execute("/backup-path/last");
 ```
