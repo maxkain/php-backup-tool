@@ -3,6 +3,8 @@
 Usage:
 ```php
 
+//creating file backup data
+
 $fileBackupData = new FileBackupData();
 
 //ssh connection
@@ -29,6 +31,7 @@ $fileBackupCopiesData->maxOldDate = new DateTime('-2 week');
 //copy interval
 $fileBackupCopiesData->dateFrom = new DateTime('-1 week');
 
+//creating mysql backup data
 
 $mysqlBackupData = new MysqlBackupData();
 $mysqlBackupData->host = 'host';
