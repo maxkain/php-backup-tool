@@ -51,10 +51,12 @@ $mysqlBackupCopiesData->maxOldDate = new DateTime('-30 days');
 $mysqlBackupCopiesData->dateFrom = new DateTime('-20 hours');
 
 //start backup copies process
+
 $backupCopiesProcess = new BackupCopiesProcess();
 $backupCopiesProcess->backupCopiesDatas = [$fileBackupCopiesData, $mysqlBackupCopiesData];
 $backupCopiesProcess->execute();
 
 //start a simple backup process
+
 $fileBackupProcess->execute("/backup-path/last");
 ```
