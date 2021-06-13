@@ -30,7 +30,7 @@ class BackupCopiesData
 {
     public function __construct(
         public BackupProcessInterface $backupProcess,
-        public string $dateFormat,
+        public string $dateFormat = 'Y-m-d',
         public string $copiesPath,
         public int $maxCopies,
         public \DateTimeInterface $maxOldDate,
