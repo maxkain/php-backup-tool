@@ -30,7 +30,7 @@ $fileBackupCopiesData->dateFormat = 'Y-m-d';
 $fileBackupCopiesData->maxCopies = 3;
 
 //the oldest copy will be synchronized with last data (file transfer economy)
-$fileBackupCopiesData->maxOldDate = new DateTime('-2 week'); 
+$fileBackupCopiesData->maxOldDate = new DateTime('-3 week'); 
 
 //copy interval
 $fileBackupCopiesData->dateFrom = new DateTime('-1 week');
@@ -51,7 +51,7 @@ $mysqlBackupCopiesData->backupProcess = $mysqlBackupProcess;
 $mysqlBackupCopiesData->dateFormat = 'Y-m-d';
 $mysqlBackupCopiesData->copiesPath = '/backup-path/db';
 $mysqlBackupCopiesData->maxCopies = 20;
-$mysqlBackupCopiesData->maxOldDate = new DateTime('-30 days');
+$mysqlBackupCopiesData->maxOldDate = new DateTime('-20 days');
 $mysqlBackupCopiesData->dateFrom = new DateTime('-20 hours');
 
 //start backup copies process
