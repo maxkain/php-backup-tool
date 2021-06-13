@@ -10,7 +10,7 @@ Usage:
 ```php
 <?php
 
-require 'backup.php';
+require 'backup-tool.php';
 
 //creating file backup data
 
