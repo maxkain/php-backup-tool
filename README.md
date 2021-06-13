@@ -15,40 +15,40 @@ require 'backup.php';
 //creating file backup data
 
 $fileBackupData = new FileBackupData(  
-  sourcePath: 'user@host:/your/path', //remote ssh connection or local path
-  excludePaths: ['/dev', '/proc', '/sys', '/tmp', '/run'],
+    sourcePath: 'user@host:/your/path', //remote ssh connection or local path
+    excludePaths: ['/dev', '/proc', '/sys', '/tmp', '/run'],
 );
 
 
 $fileBackupProcess = new FileBackupProcess($fileBackupData);
 
 $fileBackupCopiesData = new BackupCopiesData(
-  backupProcess = $fileBackupProcess,
-  copiesPath: '/backup-path/copies', //copies save path  
-  dateFormat: 'Y-m-d', //the name of copy folder
-  maxCopies: 3,
-  maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
-   dateFrom: = new DateTime('-1 week'), //copy interval
+    backupProcess = $fileBackupProcess,
+    copiesPath: '/backup-path/copies', //copies save path  
+    dateFormat: 'Y-m-d', //the name of copy folder
+    maxCopies: 3,
+    maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
+    dateFrom: = new DateTime('-1 week'), //copy interval
 );
 
 //creating mysql backup data
 
 $mysqlBackupData = new MysqlBackupData(
-  host: 'host',
-  user: 'user',
-  password: 'password',
-  databases: ['my_database'],
+    host: 'host',
+    user: 'user',
+    password: 'password',
+    databases: ['my_database'],
 );
 
 $mysqlBackupProcess = new MysqlBackupProcess($mysqlBackupData);
 
 $mysqlBackupCopiesData = new BackupCopiesData(
-  backupProcess: $mysqlBackupProcess,
-  dateFormat: 'Y-m-d',
-  copiesPath: '/backup-path/db',
-  maxCopies: 20,
-  maxOldDate: new DateTime('-20 days'),
-  dateFrom: new DateTime('-20 hours'),
+    backupProcess: $mysqlBackupProcess,
+    dateFormat: 'Y-m-d',
+    copiesPath: '/backup-path/db',
+    maxCopies: 20,
+    maxOldDate: new DateTime('-20 days'),
+    dateFrom: new DateTime('-20 hours'),
 );
 
 //start backup copies process
