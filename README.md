@@ -27,6 +27,7 @@ $fileBackupCopiesData->copiesPath = '/backup-path/copies';
 
 //the name of copy folder
 $fileBackupCopiesData->dateFormat = 'Y-m-d';
+
 $fileBackupCopiesData->maxCopies = 3;
 
 //the oldest copy will be synchronized with last data (file transfer economy)
