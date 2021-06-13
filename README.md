@@ -14,9 +14,8 @@ require 'backup.php';
 
 //creating file backup data
 
-$fileBackupData = new FileBackupData(
-  //remote ssh connection or local path
-  sourcePath: 'user@host:/your/path',
+$fileBackupData = new FileBackupData(  
+  sourcePath: 'user@host:/your/path', //remote ssh connection or local path
   excludePaths: ['/dev', '/proc', '/sys', '/tmp', '/run'],
 );
 
@@ -25,15 +24,11 @@ $fileBackupProcess = new FileBackupProcess($fileBackupData);
 
 $fileBackupCopiesData = new BackupCopiesData(
   backupProcess = $fileBackupProcess,
-  //copies save path
-  copiesPath: '/backup-path/copies',
-  //the name of copy folder
-  dateFormat: 'Y-m-d',
+  copiesPath: '/backup-path/copies', //copies save path  
+  dateFormat: 'Y-m-d', //the name of copy folder
   maxCopies: 3,
-  //the oldest copy will be synchronized with last data (file transfer economy)
-  maxOldDate: new DateTime('-3 week'),
-  //copy interval
-  dateFrom: = new DateTime('-1 week'),
+  maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
+  dateFrom: = new DateTime('-1 week'), //copy interval
 );
 
 //creating mysql backup data
