@@ -37,6 +37,56 @@ class FileBackupProcess implements BackupProcessInterface
     public function execute(string $destinationPath)
     {
         $data = $this->backupData;
+
+class FileBackupData 
+{
+    public function __construct(
+        public string $sourcePath,
+        public iterable $excludePaths = [],
+    ) {
+    }
+}
+
+class MysqlBackupData
+{
+    public function __construct(
+        public string $host,
+        public int $port = 3306,
+        public string $user,
+        public string $password,
+        public iterable $databases = [],
+    ) {
+    }
+}
+
+interface BackupProcessInterface
+{    
+    public function execute(string $dest);
+}
+
+class BackupCopiesData
+{
+    public function __construct(
+        public BackupProcessInterface $backupProcess,
+        public string $dateFormat,
+        public string $copiesPath,
+        public int $maxCopies,
+        public \DateTimeInterface $maxOldDate,
+        public \DateTimeInterface $dateFrom,
+    ) {
+    }
+}
+
+class FileBackupProcess implements BackupProcessInterface
+{  
+    public function __construct(
+        public FileBackupData $backupData,
+    ) {
+    }
+    
+    public function execute(string $destinationPath)
+    {
+        $data = $this->backupData;
         $excludeStr = '';
         foreach ($data->excludePaths as $path) {
             $excludeStr .= " --exclude='" . $path . "'";
@@ -47,7 +97,10 @@ class FileBackupProcess implements BackupProcessInterface
 
 class MysqlBackupProcess implements BackupProcessInterface
 {  
-    public MysqlBackupData $backupData;
+    public function __construct(
+        public MysqlBackupData $backupData,
+    ) {
+    }
     
     public function execute(string $destinationPath)
     {
@@ -66,8 +119,11 @@ class MysqlBackupProcess implements BackupProcessInterface
 
 class BackupCopiesProcess
 {
-    /** @var BackupCopiesData[] $backupCopiesDatas */
-    public iterable $backupCopiesDatas;
+    public function __construct(
+        /** @var BackupCopiesData[] $backupCopiesDatas */
+        public iterable $backupCopiesDatas,
+    ) {
+    }
     
     public function execute()
     {
@@ -106,3 +162,4 @@ class BackupCopiesProcess
         }        
     }
 }
+ 
