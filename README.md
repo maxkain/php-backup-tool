@@ -3,7 +3,7 @@
 Transfers only new or changed files. Full synchronization.
 Requires PHP version >= 8.0.
 For files backup you need `rsync` and `ssh` installed with added ssh key. For mysql - `mysqldump` and `zip` utilites.
-You may create your own process for any storage.
+You may create your custom process for any storage.
 Such script can be executed every day by cron.
 
 Usage:
@@ -14,56 +14,51 @@ require 'backup.php';
 
 //creating file backup data
 
-$fileBackupData = new FileBackupData();
+$fileBackupData = new FileBackupData(
+  //remote ssh connection or local path
+  sourcePath: 'user@host:/your/path',
+  excludePaths: ['/dev', '/proc', '/sys', '/tmp', '/run'],
+);
 
-//remote ssh connection or local path
-$fileBackupData->sourcePath = 'user@host:/your/path';
 
-$fileBackupData->excludePaths = ['/dev', '/proc', '/sys', '/tmp', '/run'];
+$fileBackupProcess = new FileBackupProcess($fileBackupData);
 
-$fileBackupProcess = new FileBackupProcess();
-$fileBackupProcess->backupData = $fileBackupData;
-
-$fileBackupCopiesData = new BackupCopiesData();
-$fileBackupCopiesData->backupProcess = $fileBackupProcess;
-
-//copies save path
-$fileBackupCopiesData->copiesPath = '/backup-path/copies';
-
-//the name of copy folder
-$fileBackupCopiesData->dateFormat = 'Y-m-d';
-
-$fileBackupCopiesData->maxCopies = 3;
-
-//the oldest copy will be synchronized with last data (file transfer economy)
-$fileBackupCopiesData->maxOldDate = new DateTime('-3 week'); 
-
-//copy interval
-$fileBackupCopiesData->dateFrom = new DateTime('-1 week');
+$fileBackupCopiesData = new BackupCopiesData(
+  backupProcess = $fileBackupProcess,
+  //copies save path
+  copiesPath: '/backup-path/copies',
+  //the name of copy folder
+  dateFormat: 'Y-m-d',
+  maxCopies: 3,
+  //the oldest copy will be synchronized with last data (file transfer economy)
+  maxOldDate: new DateTime('-3 week'),
+  //copy interval
+  dateFrom: = new DateTime('-1 week'),
+);
 
 //creating mysql backup data
 
-$mysqlBackupData = new MysqlBackupData();
-$mysqlBackupData->host = 'host';
-$mysqlBackupData->user = 'user';
-$mysqlBackupData->password = 'password';
-$mysqlBackupData->databases = ['my_database'];
+$mysqlBackupData = new MysqlBackupData(
+  host: 'host',
+  user: 'user',
+  password: 'password',
+  databases: ['my_database'],
+);
 
-$mysqlBackupProcess = new MysqlBackupProcess();
-$mysqlBackupProcess->backupData = $mysqlBackupData;
+$mysqlBackupProcess = new MysqlBackupProcess($mysqlBackupData);
 
-$mysqlBackupCopiesData = new BackupCopiesData();
-$mysqlBackupCopiesData->backupProcess = $mysqlBackupProcess;
-$mysqlBackupCopiesData->dateFormat = 'Y-m-d';
-$mysqlBackupCopiesData->copiesPath = '/backup-path/db';
-$mysqlBackupCopiesData->maxCopies = 20;
-$mysqlBackupCopiesData->maxOldDate = new DateTime('-20 days');
-$mysqlBackupCopiesData->dateFrom = new DateTime('-20 hours');
+$mysqlBackupCopiesData = new BackupCopiesData(
+  backupProcess: $mysqlBackupProcess,
+  dateFormat: 'Y-m-d',
+  copiesPath: '/backup-path/db',
+  maxCopies: 20,
+  maxOldDate: new DateTime('-20 days'),
+  dateFrom: new DateTime('-20 hours'),
+);
 
 //start backup copies process
 
-$backupCopiesProcess = new BackupCopiesProcess();
-$backupCopiesProcess->backupCopiesDatas = [$fileBackupCopiesData, $mysqlBackupCopiesData];
+$backupCopiesProcess = new BackupCopiesProcess([$fileBackupCopiesData, $mysqlBackupCopiesData]);
 $backupCopiesProcess->execute();
 
 //start a simple backup process
