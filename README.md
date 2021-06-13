@@ -28,7 +28,7 @@ $fileBackupCopiesData = new BackupCopiesData(
   dateFormat: 'Y-m-d', //the name of copy folder
   maxCopies: 3,
   maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
-  dateFrom: = new DateTime('-1 week'), //copy interval
+   dateFrom: = new DateTime('-1 week'), //copy interval
 );
 
 //creating mysql backup data
