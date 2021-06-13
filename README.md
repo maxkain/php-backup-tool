@@ -12,7 +12,7 @@ require 'backup.php';
 $fileBackupData = new FileBackupData();
 
 //ssh connection
-$fileBackupData->sourcePath = 'user@host:/any/path';
+$fileBackupData->sourcePath = 'user@host:/your/path';
 
 $fileBackupData->excludePaths = ['/dev', '/proc', '/sys', '/tmp', '/run'];
 
