@@ -14,7 +14,7 @@ require 'backup.php';
 
 $fileBackupData = new FileBackupData();
 
-//ssh connection
+//remote ssh connection or local path
 $fileBackupData->sourcePath = 'user@host:/your/path';
 
 $fileBackupData->excludePaths = ['/dev', '/proc', '/sys', '/tmp', '/run'];
