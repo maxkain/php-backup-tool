@@ -27,7 +27,7 @@ $fileBackupProcess->execute("/backup-path/last");
 $fileBackupCopiesData = new BackupCopiesData(
     backupProcess: $fileBackupProcess,
     copiesPath: '/backup-path/copies', //copies save path  
-    dateFormat: 'Y-m-d', //the name of copy folder
+    dateFormat: 'Y-m-d', //the name of copy folder (default: 'Y-m-d')
     maxCopies: 3,
     maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
     dateFrom: new DateTime('-1 week'), //copy interval
@@ -46,7 +46,6 @@ $mysqlBackupProcess = new MysqlBackupProcess($mysqlBackupData);
 
 $mysqlBackupCopiesData = new BackupCopiesData(
     backupProcess: $mysqlBackupProcess,
-    dateFormat: 'Y-m-d',
     copiesPath: '/backup-path/db',
     maxCopies: 20,
     maxOldDate: new DateTime('-20 days'),
