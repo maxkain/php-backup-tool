@@ -27,7 +27,7 @@ $fileBackupProcess->execute("/backup-path/last");
 $fileBackupCopiesData = new BackupCopiesData(
     backupProcess: $fileBackupProcess,
     copiesPath: '/backup-path/copies', //copies save path  
-    dateFormat: 'Y-m-d', //the name of copy folder (default: 'Y-m-d')
+    dateFormat: 'Y-m-d', //the name of copy folder (optional)
     maxCopies: 3,
     maxOldDate: new DateTime('-3 week'), //the oldest copy becomes the newest
     dateFrom: new DateTime('-1 week'), //copy interval
