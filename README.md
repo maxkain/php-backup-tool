@@ -4,6 +4,7 @@ For files backup you need `rsync` and `ssh` with added ssh key. For mysql - `mys
 
 Usage:
 ```php
+<?php
 
 require 'backup.php';
 
