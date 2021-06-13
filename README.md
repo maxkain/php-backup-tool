@@ -2,7 +2,7 @@
 
 Transfers only new or changed files. Full synchronization.
 Requires PHP version >= 8.0.
-For files backup you need `rsync` and `ssh` with added ssh key. For mysql - `mysqldump` and `zip` utilites.
+For files backup you need `rsync` and `ssh` installed with added ssh key. For mysql - `mysqldump` and `zip` utilites.
 You may execute such script every day by cron.
 
 Usage:
