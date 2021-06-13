@@ -1,4 +1,4 @@
-# Files and mysql databeses backup utility
+# Files and mysql databases backup utility
 
 Usage:
 ```php
