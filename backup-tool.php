@@ -110,6 +110,7 @@ class BackupCopiesProcess
                         
                         if ($date < $backupCopiesData->maxOldDate) {
                             $newDir = $backupCopiesData->copiesPath . '/' . date($backupCopiesData->dateFormat);
+                            rename($dir, $newDir);
                             $backupCopiesData->backupProcess->execute($newDir);
                         }
                     }
