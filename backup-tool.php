@@ -107,9 +107,18 @@ class BackupCopiesProcess
                         if (!$lastDate || $date > $lastDate) {
                             $lastDate = $date;
                         }
-                        
-                        if ($date < $backupCopiesData->maxOldDate) {
-                            $newDir = $backupCopiesData->copiesPath . '/' . date($backupCopiesData->dateFormat);
+                    }
+                }
+            }
+
+            foreach ($dirs as $dirName) {
+                $dir = $backupCopiesData->copiesPath . '/' . $dirName;
+                if (is_dir($dir)) {
+                    $date = \DateTime::createFromFormat($backupCopiesData->dateFormat, $dirName);
+                    if ($date) {                                    
+                        if ($date < $backupCopiesData->maxOldDate && $lastDate < $backupCopiesData->dateFrom) {
+                            $lastDate = date($backupCopiesData->dateFormat);
+                            $newDir = $backupCopiesData->copiesPath . '/' . $lastDate;
                             rename($dir, $newDir);
                             $backupCopiesData->backupProcess->execute($newDir);
                         }
